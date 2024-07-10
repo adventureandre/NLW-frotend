@@ -31,12 +31,22 @@ export function App() {
     const data = new FormData(event.currentTarget)
     const email = data.get('email')?.toString()
 
-    if(!email){
+    if (!email) {
       return
     }
 
-    setEmailsToInvite([...emailsToInvite , email])
-    
+    if (emailsToInvite.includes(email)) {
+      return
+    }
+
+    setEmailsToInvite([...emailsToInvite, email])
+
+    event.currentTarget.reset()
+  }
+
+  function removeEmailFromInvite(emailToRemove: string) {
+    const newEmaiList = emailsToInvite.filter(email => email !== emailToRemove)
+    setEmailsToInvite(newEmaiList)
   }
 
   return (
@@ -127,7 +137,7 @@ export function App() {
                 return (
                   <div key={email} className="py-1.5 px-2.5 rounded-md bg-zinc-800 flex items-center gap-2" >
                     <span className="text-zinc-300">{email}</span>
-                    <button type="button"><X className="size-4 text-zinc-400" /></button>
+                    <button type="button" onClick={() => removeEmailFromInvite(email)}><X className="size-4 text-zinc-400" /></button>
                   </div>
                 )
               })}
