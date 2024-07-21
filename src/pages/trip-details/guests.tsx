@@ -29,10 +29,10 @@ export function Guests() {
 
             <div className="space-y-5 ">
 
-                {participants && participants.map(participant => (
+                {participants && participants.map((participant, index) => (
                     <div key={participant.id} className="flex justify-between gap-4">
                         <div className="space-y-1.5">
-                            <span className="block font-medium text-zinc-100">{participant.nome}</span>
+                            <span className="block font-medium text-zinc-100">{participant.nome ?? `Convidado ${index}`}</span>
                             <span className="block font-sm text-zinc-400 truncate">
                                {participant.email}
                             </span>
